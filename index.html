@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAJWANT — The Palace of Jewels | Est. 1985, Thane</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+SC:wght@500;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1C120F;
+    --emerald:#0D3B2E;
+    --emerald-deep:#082922;
+    --ruby:#7A1E2B;
+    --gold:#B8924A;
+    --gold-bright:#E3C077;
+    --ivory:#F1E9D8;
+    --paper:#FBF7EF;
+    --line: rgba(184,146,74,0.35);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Jost', sans-serif;
+    font-weight:300;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  ::selection{background:var(--gold-bright);color:var(--ink);}
+
+  .eyebrow{
+    font-family:'Cormorant SC', serif;
+    letter-spacing:0.28em;
+    text-transform:uppercase;
+    font-size:12.5px;
+    font-weight:600;
+    color:var(--gold);
+  }
+  h1,h2,h3{font-family:'Cormorant Garamond', serif; font-weight:500; line-height:1.05;}
+  .serif-italic{font-style:italic; font-weight:400;}
+
+  /* ---------- Ornamental arch (signature motif) ---------- */
+  .arch-divider{width:100%; display:block; overflow:hidden; line-height:0;}
+  .arch-divider svg{width:100%; height:auto; display:block;}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:22px 5vw;
+    background:linear-gradient(to bottom, rgba(8,41,34,0.92), rgba(8,41,34,0));
+    transition:background .4s ease, padding .4s ease;
+  }
+  header.scrolled{
+    background:var(--emerald-deep);
+    padding:14px 5vw;
+    box-shadow:0 6px 24px rgba(0,0,0,0.25);
+    border-bottom:1px solid var(--line);
+  }
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand-mark{width:34px; height:34px; flex-shrink:0;}
+  .brand-text{color:var(--ivory);}
+  .brand-text .name{font-family:'Cormorant SC', serif; font-size:19px; letter-spacing:0.14em; font-weight:600;}
+  .brand-text .tag{font-size:9.5px; letter-spacing:0.24em; color:var(--gold-bright); text-transform:uppercase; margin-top:1px;}
+
+  nav.links{display:flex; gap:38px; align-items:center;}
+  nav.links a{
+    color:var(--ivory); font-size:13px; letter-spacing:0.06em;
+    position:relative; padding-bottom:4px;
+  }
+  nav.links a::after{
+    content:''; position:absolute; left:0; bottom:0; width:0; height:1px;
+    background:var(--gold-bright); transition:width .3s ease;
+  }
+  nav.links a:hover::after{width:100%;}
+  .nav-cta{
+    border:1px solid var(--gold); color:var(--gold-bright) !important;
+    padding:9px 20px; border-radius:2px; font-size:12px; letter-spacing:0.1em;
+  }
+  .nav-cta:hover{background:var(--gold); color:var(--emerald-deep) !important;}
+  .menu-btn{display:none; background:none; border:none; color:var(--ivory); font-size:22px; cursor:pointer;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative; min-height:100vh;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(184,146,74,0.18), transparent 60%),
+      linear-gradient(160deg, var(--emerald-deep) 0%, var(--emerald) 55%, #0a3226 100%);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:140px 6vw 100px;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:''; position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(184,146,74,0.035) 0 2px, transparent 2px 26px),
+      repeating-linear-gradient(-45deg, rgba(184,146,74,0.035) 0 2px, transparent 2px 26px);
+    pointer-events:none;
+  }
+  .hero-arch{
+    width:min(560px, 78vw); margin:0 auto 8px; position:relative; z-index:2;
+    animation:fadeUp 1.1s ease both;
+  }
+  .est-badge{
+    z-index:2; display:inline-flex; align-items:center; gap:10px;
+    color:var(--gold-bright); font-family:'Cormorant SC', serif;
+    letter-spacing:0.3em; font-size:11.5px; text-transform:uppercase;
+    margin-bottom:22px; animation:fadeUp 1.1s ease .1s both;
+  }
+  .est-badge .dot{width:4px;height:4px;background:var(--gold-bright); border-radius:50%;}
+  .hero h1{
+    z-index:2; color:var(--paper); font-size:clamp(48px, 8vw, 108px);
+    letter-spacing:0.01em; animation:fadeUp 1.1s ease .18s both;
+  }
+  .hero h1 .glint{color:var(--gold-bright);}
+  .hero-sub{
+    z-index:2; max-width:560px; margin:26px auto 0; color:rgba(241,233,216,0.78);
+    font-size:16.5px; line-height:1.75; font-weight:300;
+    animation:fadeUp 1.1s ease .26s both;
+  }
+  .hero-ctas{z-index:2; display:flex; gap:18px; margin-top:44px; flex-wrap:wrap; justify-content:center; animation:fadeUp 1.1s ease .34s both;}
+  .btn-gold{
+    background:var(--gold-bright); color:var(--emerald-deep);
+    padding:15px 34px; font-size:13px; letter-spacing:0.12em; text-transform:uppercase;
+    border-radius:2px; font-weight:500; transition:transform .25s ease, box-shadow .25s ease;
+    box-shadow:0 8px 24px rgba(227,192,119,0.15);
+  }
+  .btn-gold:hover{transform:translateY(-2px); box-shadow:0 12px 30px rgba(227,192,119,0.28);}
+  .btn-outline{
+    border:1px solid rgba(241,233,216,0.4); color:var(--paper);
+    padding:15px 34px; font-size:13px; letter-spacing:0.12em; text-transform:uppercase;
+    border-radius:2px; transition:border-color .25s ease, background .25s ease;
+  }
+  .btn-outline:hover{border-color:var(--gold-bright); background:rgba(227,192,119,0.08);}
+
+  @keyframes fadeUp{from{opacity:0; transform:translateY(22px);} to{opacity:1; transform:translateY(0);}}
+  @media (prefers-reduced-motion: reduce){
+    .hero-arch, .est-badge, .hero h1, .hero-sub, .hero-ctas{animation:none;}
+  }
+
+  /* ---------- MATERIAL RAIL ---------- */
+  .rail{
+    background:var(--ink); color:var(--gold-bright);
+    padding:16px 0; overflow:hidden; white-space:nowrap;
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+  }
+  .rail-track{display:inline-block; animation:scroll 32s linear infinite;}
+  .rail-track span{
+    font-family:'Cormorant SC', serif; letter-spacing:0.32em; font-size:14px;
+    padding:0 28px; text-transform:uppercase;
+  }
+  .rail-track span::after{content:'✦'; margin-left:28px; color:var(--gold); font-size:10px;}
+  @keyframes scroll{from{transform:translateX(0);} to{transform:translateX(-50%);}}
+
+  section{padding:120px 6vw;}
+  .section-head{max-width:640px; margin:0 auto 64px; text-align:center;}
+  .section-head h2{font-size:clamp(34px,4.4vw,54px); margin-top:10px;}
+  .section-head p{margin-top:18px; color:rgba(28,18,15,0.65); font-size:15.5px; line-height:1.75;}
+  .center{text-align:center;}
+
+  /* ---------- HERITAGE ---------- */
+  .heritage{background:var(--paper);}
+  .heritage-grid{
+    max-width:1180px; margin:0 auto; display:grid; grid-template-columns:1.05fr 0.95fr;
+    gap:80px; align-items:center;
+  }
+  .heritage-copy .eyebrow{display:block; margin-bottom:14px;}
+  .heritage-copy h2{font-size:clamp(30px,3.6vw,46px); margin-bottom:22px;}
+  .heritage-copy p{color:rgba(28,18,15,0.72); font-size:15.5px; line-height:1.85; margin-bottom:18px;}
+  .stat-frame{
+    display:grid; grid-template-columns:1fr 1fr; border:1px solid var(--line);
+    background:var(--ivory);
+  }
+  .stat-cell{
+    padding:38px 26px; text-align:center; border-right:1px solid var(--line); border-bottom:1px solid var(--line);
+  }
+  .stat-cell:nth-child(2n){border-right:none;}
+  .stat-cell:nth-child(3),.stat-cell:nth-child(4){border-bottom:none;}
+  .stat-cell .num{font-family:'Cormorant Garamond', serif; font-size:44px; color:var(--emerald); font-weight:600;}
+  .stat-cell .lbl{font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); margin-top:8px;}
+
+  /* ---------- COLLECTIONS ---------- */
+  .collections{background:var(--ivory);}
+  .vitrine-grid{
+    max-width:1220px; margin:0 auto; display:grid;
+    grid-template-columns:repeat(3, 1fr); gap:2px; background:var(--line);
+    border:1px solid var(--line);
+  }
+  .vitrine-card{
+    background:var(--paper); padding:52px 34px; position:relative; overflow:hidden;
+    transition:background .35s ease;
+    min-height:280px; display:flex; flex-direction:column; justify-content:flex-end;
+  }
+  .vitrine-card:hover{background:var(--emerald-deep);}
+  .vitrine-card:hover .facet{transform:scale(1.12) rotate(8deg);}
+  .vitrine-card:hover h3, .vitrine-card:hover p{color:var(--paper);}
+  .vitrine-card:hover .idx{color:var(--gold-bright);}
+  .facet{
+    position:absolute; top:36px; right:34px; width:54px; height:54px;
+    transition:transform .5s cubic-bezier(.2,.8,.2,1);
+  }
+  .idx{
+    font-family:'Cormorant SC', serif; font-size:12px; letter-spacing:0.2em;
+    color:var(--gold); transition:color .35s ease;
+  }
+  .vitrine-card h3{font-size:27px; margin:14px 0 10px; color:var(--ink); transition:color .35s ease;}
+  .vitrine-card p{font-size:13.5px; color:rgba(28,18,15,0.6); line-height:1.65; transition:color .35s ease; font-weight:300;}
+
+  /* ---------- CRAFT / WHY ---------- */
+  .craft{background:var(--emerald-deep); color:var(--paper);}
+  .craft .section-head .eyebrow{color:var(--gold-bright);}
+  .craft .section-head p{color:rgba(241,233,216,0.65);}
+  .craft-row{
+    max-width:1180px; margin:0 auto; display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+    background:var(--line);
+  }
+  .craft-item{background:var(--emerald-deep); padding:40px 26px; text-align:center;}
+  .craft-item .num{font-family:'Cormorant Garamond', serif; color:var(--gold-bright); font-size:34px; margin-bottom:14px;}
+  .craft-item h4{font-family:'Jost'; font-weight:500; font-size:15px; letter-spacing:0.02em; margin-bottom:10px; color:var(--paper);}
+  .craft-item p{font-size:13px; color:rgba(241,233,216,0.6); line-height:1.6; font-weight:300;}
+
+  /* ---------- TESTIMONIALS ---------- */
+  .testimonials{background:var(--paper);}
+  .test-grid{max-width:1100px; margin:0 auto; display:grid; grid-template-columns:repeat(3,1fr); gap:40px;}
+  .test-card{border-top:2px solid var(--gold); padding-top:24px;}
+  .test-card p{font-family:'Cormorant Garamond', serif; font-style:italic; font-size:19px; line-height:1.6; color:var(--ink); margin-bottom:18px;}
+  .test-card .who{font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold);}
+  .rating-strip{max-width:1100px; margin:56px auto 0; display:flex; align-items:center; justify-content:center; gap:14px; color:var(--gold);}
+  .rating-strip .stars{letter-spacing:2px; font-size:16px;}
+  .rating-strip .score{font-family:'Cormorant Garamond', serif; font-size:20px; color:var(--ink);}
+  .rating-strip .src{font-size:12px; color:rgba(28,18,15,0.5);}
+
+  /* ---------- VISIT US ---------- */
+  .visit{background:var(--ivory);}
+  .visit-grid{max-width:1180px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:2px; background:var(--line); border:1px solid var(--line);}
+  .store-card{background:var(--paper); padding:44px 40px;}
+  .store-card .eyebrow{display:block; margin-bottom:12px;}
+  .store-card h3{font-size:26px; margin-bottom:16px;}
+  .store-card address{font-style:normal; font-size:14.5px; line-height:1.8; color:rgba(28,18,15,0.68); margin-bottom:18px;}
+  .store-meta{display:flex; gap:22px; margin-bottom:24px; flex-wrap:wrap;}
+  .store-meta div{font-size:12.5px; color:var(--emerald);}
+  .store-meta span{display:block; font-size:10.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); margin-bottom:3px;}
+  .link-arrow{font-size:13px; letter-spacing:0.08em; color:var(--emerald); border-bottom:1px solid var(--gold); padding-bottom:3px; display:inline-flex; align-items:center; gap:8px;}
+  .link-arrow:hover{color:var(--ruby);}
+
+  /* ---------- APPOINTMENT CTA ---------- */
+  .appointment{
+    background:linear-gradient(135deg, var(--emerald-deep), var(--emerald));
+    color:var(--paper); text-align:center; padding:110px 6vw;
+    position:relative;
+  }
+  .appointment h2{font-size:clamp(32px,4.6vw,56px); margin-bottom:20px;}
+  .appointment p{color:rgba(241,233,216,0.7); max-width:520px; margin:0 auto 36px; font-size:15.5px; line-height:1.75;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink); color:rgba(241,233,216,0.7); padding:70px 6vw 30px;}
+  .footer-grid{max-width:1180px; margin:0 auto; display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:50px; padding-bottom:50px; border-bottom:1px solid rgba(184,146,74,0.2);}
+  .footer-brand .name{font-family:'Cormorant SC', serif; font-size:20px; letter-spacing:0.14em; color:var(--paper);}
+  .footer-brand p{margin-top:14px; font-size:13.5px; line-height:1.75; color:rgba(241,233,216,0.55); max-width:280px;}
+  footer h5{font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); margin-bottom:18px; font-weight:500;}
+  footer ul{list-style:none;}
+  footer li{margin-bottom:11px; font-size:13.5px;}
+  footer a:hover{color:var(--gold-bright);}
+  .footer-bottom{max-width:1180px; margin:0 auto; display:flex; justify-content:space-between; padding-top:26px; font-size:12px; color:rgba(241,233,216,0.4); flex-wrap:wrap; gap:10px;}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 920px){
+    nav.links{display:none;}
+    .menu-btn{display:block;}
+    .heritage-grid{grid-template-columns:1fr; gap:50px;}
+    .vitrine-grid{grid-template-columns:repeat(2,1fr);}
+    .craft-row{grid-template-columns:repeat(2,1fr);}
+    .test-grid{grid-template-columns:1fr; gap:44px;}
+    .visit-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr; gap:36px;}
+  }
+  @media (max-width: 560px){
+    section{padding:90px 6vw;}
+    .vitrine-grid{grid-template-columns:1fr;}
+    .craft-row{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="brand">
+    <svg class="brand-mark" viewBox="0 0 40 40" fill="none">
+      <path d="M20 3 L34 15 L30 37 L10 37 L6 15 Z" stroke="#E3C077" stroke-width="1.1"/>
+      <path d="M20 3 L20 37 M6 15 L34 15 M13 15 L16 37 M27 15 L24 37" stroke="#E3C077" stroke-width="0.6" opacity="0.7"/>
+    </svg>
+    <div class="brand-text">
+      <div class="name">RAJWANT</div>
+      <div class="tag">Palace of Jewels</div>
+    </div>
+  </div>
+  <nav class="links">
+    <a href="#heritage">Heritage</a>
+    <a href="#collections">Collections</a>
+    <a href="#craft">Why Us</a>
+    <a href="#visit">Visit Us</a>
+    <a href="#visit" class="nav-cta">Book Appointment</a>
+  </nav>
+  <button class="menu-btn" aria-label="Menu">☰</button>
+</header>
+
+<section class="hero">
+  <svg class="hero-arch" viewBox="0 0 560 210" fill="none">
+    <path d="M20 210 V110 C20 40 70 8 280 8 C490 8 540 40 540 110 V210" stroke="#E3C077" stroke-width="1.2" opacity="0.85"/>
+    <path d="M50 210 V115 C50 60 95 32 280 32 C465 32 510 60 510 115 V210" stroke="#E3C077" stroke-width="0.6" opacity="0.45"/>
+    <circle cx="280" cy="55" r="4" fill="#E3C077" opacity="0.9"/>
+    <path d="M280 8 L280 32 M20 110 L50 115 M540 110 L510 115" stroke="#E3C077" stroke-width="0.6" opacity="0.5"/>
+  </svg>
+  <div class="est-badge"><span>Est. 1985</span><span class="dot"></span><span>Thane, Mumbai</span><span class="dot"></span><span>39 Years of Trust</span></div>
+  <h1>The <span class="glint">Palace</span><br>of Jewels</h1>
+  <p class="hero-sub">Bespoke gold, diamond, platinum and gemstone jewellery, hand-finished for three generations of families across Thane. Every piece hallmarked, every design your own.</p>
+  <div class="hero-ctas">
+    <a href="#collections" class="btn-gold">Explore Collections</a>
+    <a href="#visit" class="btn-outline">Visit the Showroom</a>
+  </div>
+</section>
+
+<div class="rail">
+  <div class="rail-track">
+    <span>Gold</span><span>Silver</span><span>Diamond</span><span>Platinum</span><span>Gemstones</span><span>Corporate Gifting</span>
+    <span>Gold</span><span>Silver</span><span>Diamond</span><span>Platinum</span><span>Gemstones</span><span>Corporate Gifting</span>
+  </div>
+</div>
+
+<section class="heritage" id="heritage">
+  <div class="heritage-grid">
+    <div class="heritage-copy">
+      <span class="eyebrow">Our Story</span>
+      <h2>A house built on <span class="serif-italic">trust</span>, since 1985</h2>
+      <p>RAJWANT — The Palace of Jewels began as a single counter in Thane and has grown into one of the city's most recognised bespoke jewellery houses, now with showrooms at Hiranandani Meadows and near Talao Pali.</p>
+      <p>For four decades, the same principle has guided every piece leaving our workshop: authentic hallmarking, fair making charges, and craftsmanship that treats each order as an heirloom in the making — not a transaction.</p>
+      <a href="#craft" class="link-arrow">Discover our craft ↓</a>
+    </div>
+    <div class="stat-frame">
+      <div class="stat-cell"><div class="num">1985</div><div class="lbl">Est.</div></div>
+      <div class="stat-cell"><div class="num">39</div><div class="lbl">Years</div></div>
+      <div class="stat-cell"><div class="num">4.4</div><div class="lbl">Guest Rating</div></div>
+      <div class="stat-cell"><div class="num">2</div><div class="lbl">Thane Showrooms</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="collections" id="collections">
+  <div class="section-head">
+    <span class="eyebrow">The Collections</span>
+    <h2>Every metal.<br>Every occasion.</h2>
+    <p>From everyday gold to bridal diamond sets, each collection is available bespoke, sized and finished to order.</p>
+  </div>
+  <div class="vitrine-grid">
+    <div class="vitrine-card">
+      <svg class="facet" viewBox="0 0 60 60"><polygon points="30,4 52,22 44,54 16,54 8,22" fill="none" stroke="#B8924A" stroke-width="1.1"/><polygon points="30,4 30,54" fill="none" stroke="#B8924A" stroke-width="0.5" opacity="0.6"/></svg>
+      <span class="idx">01 — Gold</span>
+      <h3>Gold Jewellery</h3>
+      <p>Bangles, chains, necklaces and temple sets in hallmarked 22K and 18K gold.</p>
+    </div>
+    <div class="vitrine-card">
+      <svg class="facet" viewBox="0 0 60 60"><polygon points="30,4 52,22 44,54 16,54 8,22" fill="none" stroke="#B8924A" stroke-width="1.1"/><polygon points="30,4 30,54" fill="none" stroke="#B8924A" stroke-width="0.5" opacity="0.6"/></svg>
+      <span class="idx">02 — Silver</span>
+      <h3>Silver Jewellery</h3>
+      <p>Payals, rings and gifting silverware, finished with fine detailing.</p>
+    </div>
+    <div class="vitrine-card">
+      <svg class="facet" viewBox="0 0 60 60"><polygon points="30,6 50,26 30,54 10,26" fill="none" stroke="#B8924A" stroke-width="1.1"/><polygon points="10,26 50,26 30,54" fill="none" stroke="#B8924A" stroke-width="0.5" opacity="0.6"/></svg>
+      <span class="idx">03 — Diamond</span>
+      <h3>Diamond Jewellery</h3>
+      <p>Certified solitaires and diamond sets for engagements and weddings.</p>
+    </div>
+    <div class="vitrine-card">
+      <svg class="facet" viewBox="0 0 60 60"><circle cx="30" cy="30" r="22" fill="none" stroke="#B8924A" stroke-width="1.1"/><circle cx="30" cy="30" r="12" fill="none" stroke="#B8924A" stroke-width="0.5" opacity="0.6"/></svg>
+      <span class="idx">04 — Platinum</span>
+      <h3>Platinum Jewellery</h3>
+      <p>Understated platinum bands and sets for modern, everyday wear.</p>
+    </div>
+    <div class="vitrine-card">
+      <svg class="facet" viewBox="0 0 60 60"><polygon points="30,4 56,30 30,56 4,30" fill="none" stroke="#B8924A" stroke-width="1.1"/></svg>
+      <span class="idx">05 — Gemstones</span>
+      <h3>Genuine Gemstones</h3>
+      <p>Certified emeralds, rubies and sapphires, set to your own design.</p>
+    </div>
+    <div class="vitrine-card">
+      <svg class="facet" viewBox="0 0 60 60"><rect x="12" y="12" width="36" height="36" fill="none" stroke="#B8924A" stroke-width="1.1" transform="rotate(45 30 30)"/></svg>
+      <span class="idx">06 — Gifting</span>
+      <h3>Corporate Gifting</h3>
+      <p>Curated gifting for festivals, milestones and corporate occasions.</p>
+    </div>
+  </div>
+</section>
+
+<section class="craft" id="craft">
+  <div class="section-head">
+    <span class="eyebrow">Why Rajwant</span>
+    <h2>The palace standard</h2>
+    <p>What's kept families returning for four decades.</p>
+  </div>
+  <div class="craft-row">
+    <div class="craft-item"><div class="num">✦</div><h4>Hallmark Certified</h4><p>Every piece carries verified purity, gold to gemstone.</p></div>
+    <div class="craft-item"><div class="num">✦</div><h4>Bespoke Design</h4><p>Your sketch, your sizing, your occasion — made to order.</p></div>
+    <div class="craft-item"><div class="num">✦</div><h4>Fair Making Charges</h4><p>Transparent pricing, explained before you commit.</p></div>
+    <div class="craft-item"><div class="num">✦</div><h4>Prompt Service</h4><p>Same-day delivery and polishing available in-store.</p></div>
+  </div>
+</section>
+
+<section class="testimonials">
+  <div class="section-head">
+    <span class="eyebrow">Guest Voices</span>
+    <h2>Four decades of word of mouth</h2>
+  </div>
+  <div class="test-grid">
+    <div class="test-card">
+      <p>"A genuinely good collection, and the making charges never feel like a surprise. That's rare to find."</p>
+      <div class="who">Longtime Customer, Thane</div>
+    </div>
+    <div class="test-card">
+      <p>"The staff took the time to understand exactly what I wanted for the wedding set. Courteous from start to finish."</p>
+      <div class="who">Bridal Customer</div>
+    </div>
+    <div class="test-card">
+      <p>"Trustworthy is the word I'd use. We've bought from Rajwant for two generations now."</p>
+      <div class="who">Family Customer, Hiranandani</div>
+    </div>
+  </div>
+  <div class="rating-strip">
+    <span class="stars">★★★★☆</span>
+    <span class="score">4.4 / 5</span>
+    <span class="src">from guest reviews across Thane</span>
+  </div>
+</section>
+
+<section class="visit" id="visit">
+  <div class="section-head">
+    <span class="eyebrow">Visit Us</span>
+    <h2>Two showrooms, one standard</h2>
+  </div>
+  <div class="visit-grid">
+    <div class="store-card">
+      <span class="eyebrow">Showroom — Hiranandani Meadows</span>
+      <h3>Emerald Plaza</h3>
+      <address>Shop No. 1/2, Emerald Plaza, Block No. 1,<br>Hiranandani Meadows, Lokpuram Society,<br>Thane West, Thane – 400610</address>
+      <div class="store-meta">
+        <div><span>Hours</span>Opens 10:30 AM</div>
+        <div><span>Landmark</span>Next to Kashinath Ghanekar Hall</div>
+      </div>
+      <a class="link-arrow" href="https://www.google.com/maps/place/RAJWANT+-+The+Palace+of+Jewels/@19.1925327,72.9688007,17z/data=!3m1!4b1!4m6!3m5!1s0x3be7b923dba76aed:0x69f604d7cafc0701!8m2!3d19.1925328!4d72.9736716" target="_blank" rel="noopener">Get Directions →</a>
+    </div>
+    <div class="store-card">
+      <span class="eyebrow">Showroom — Talao Pali</span>
+      <h3>Talao Pali Store</h3>
+      <address>Near Gadkari Rangayatan Hall,<br>Next to Raymond Shop,<br>Talao Pali, Thane West, Thane</address>
+      <div class="store-meta">
+        <div><span>Hours</span>Opens 10:30 AM</div>
+        <div><span>Rating</span>4.4 / 5 · 573 Reviews</div>
+      </div>
+      <a class="link-arrow" href="https://www.instagram.com/rajwant_the_palace_of_jewels/" target="_blank" rel="noopener">View on Instagram →</a>
+    </div>
+  </div>
+</section>
+
+<section class="appointment">
+  <span class="eyebrow" style="color:#E3C077;">Private Appointments</span>
+  <h2>Design something<br><span class="serif-italic">only yours</span></h2>
+  <p>Bring a reference, a family piece to remake, or just an idea — our design team will sketch it with you, free of obligation.</p>
+  <a href="tel:+919821290401" class="btn-gold">Call +91 98212 90401</a>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="name">RAJWANT — THE PALACE OF JEWELS</div>
+      <p>Bespoke gold, silver, diamond, platinum and gemstone jewellery in Thane, Mumbai. Trusted since 1985.</p>
+    </div>
+    <div>
+      <h5>Showrooms</h5>
+      <ul>
+        <li>Emerald Plaza, Hiranandani</li>
+        <li>Talao Pali, Thane West</li>
+      </ul>
+    </div>
+    <div>
+      <h5>Explore</h5>
+      <ul>
+        <li><a href="#collections">Collections</a></li>
+        <li><a href="#craft">Why Us</a></li>
+        <li><a href="#visit">Visit Us</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Connect</h5>
+      <ul>
+        <li><a href="https://www.instagram.com/rajwant_the_palace_of_jewels/" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://www.facebook.com/Rajwantthepalaceofjewels/" target="_blank" rel="noopener">Facebook</a></li>
+        <li><a href="tel:+919821290401">+91 98212 90401</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Rajwant — The Palace of Jewels. Demo website.</span>
+    <span>Est. 1985 · Thane, Maharashtra</span>
+  </div>
+</footer>
+
+<script>
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+</script>
+</body>
+</html>
